@@ -1,6 +1,6 @@
-import { api } from '../api';
-import { unwrapList } from '../api/unwrapList';
-import type { CartItem, Order, OrderCreateInput } from '../types';
+import { api } from '@/store/api';
+import { unwrapList } from '@/store/api/unwrapList';
+import type { CartItem, Order, OrderCreateInput } from '@/store/types';
 
 type ServerCart = { items: { id: number }[] };
 
