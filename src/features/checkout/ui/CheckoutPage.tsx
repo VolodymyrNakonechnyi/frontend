@@ -103,7 +103,7 @@ export default function CheckoutPage() {
   const [errors, setErrors] = useState<FieldErrors>({});
   const [submitNote, setSubmitNote] = useState('');
   const [loadError, setLoadError] = useState('');
-  const [placeOrder, { isLoading: isPlacingOrder }] = usePlaceOrderMutation();
+  const [placeOrder, { isLoading: isPlacingOrderLoading }] = usePlaceOrderMutation();
   const { hasSession } = useSessionEmail();
   const { openAuth } = useAuthOverlay();
 
@@ -261,7 +261,7 @@ export default function CheckoutPage() {
 
   const onSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    if (isPlacingOrder) return;
+    if (isPlacingOrderLoading) return;
     const nextErrors: FieldErrors = {};
     if (!firstName.trim()) nextErrors.firstName = t.checkout.required;
     if (!lastName.trim()) nextErrors.lastName = t.checkout.required;
@@ -866,8 +866,8 @@ export default function CheckoutPage() {
           <div className="h-px bg-black/40" />
           <button
             type="submit"
-            disabled={isPlacingOrder}
-            aria-busy={isPlacingOrder}
+            disabled={isPlacingOrderLoading}
+            aria-busy={isPlacingOrderLoading}
             className="inline-flex h-14 w-full items-center justify-center rounded-lg bg-dark px-5 font-heading text-[16px] font-normal text-white disabled:opacity-60"
           >
             {t.checkout.confirm}
